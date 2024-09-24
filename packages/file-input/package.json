@@ -1,0 +1,26 @@
+{
+  "name": "@repo/file-input",
+  "type": "module",
+  "version": "1.0.1",
+  "scripts": {
+    "dev": "tsup src/index.tsx --format cjs,esm --dts --watch",
+    "build": "tsup src/index.tsx --format cjs,esm --dts"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tsup": "^8.3.0",
+    "typescript": "latest"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "private": false
+}
