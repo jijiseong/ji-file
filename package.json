@@ -1,6 +1,7 @@
 {
   "name": "ji-file",
   "private": false,
+  "version": "1.0.0",
   "type": "module",
   "description": "Utilities about file input for the best UX",
   "scripts": {
