@@ -14,13 +14,11 @@
   "devDependencies": {
     "prettier": "^3.2.5",
     "turbo": "^2.1.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@changesets/cli": "^2.27.8"
   },
   "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
-  },
-  "dependencies": {
-    "@changesets/cli": "^2.27.8"
   }
 }
