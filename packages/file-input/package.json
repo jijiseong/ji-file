@@ -1,5 +1,5 @@
 {
-  "name": "@repo/file-input",
+  "name": "@ji-file/file-input",
   "type": "module",
   "version": "1.0.1",
   "scripts": {
@@ -10,7 +10,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
+    "@ji-file/typescript-config": "workspace:*",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "react": "^18.0.0",

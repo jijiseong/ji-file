@@ -1,4 +1,4 @@
-import { FileInput } from '@repo/file-input';
+import { FileInput } from '@ji-file/file-input';
 
 export default function Home() {
   return (
