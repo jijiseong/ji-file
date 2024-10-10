@@ -1,9 +1,9 @@
 {
-  "extends": "@ji-file/typescript-config/react-library.json",
+  "extends": "@ji-file/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

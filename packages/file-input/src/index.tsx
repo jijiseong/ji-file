@@ -1,7 +1,6 @@
-import { HTMLAttributes } from 'react';
+'use client';
 
-interface Props extends HTMLAttributes<HTMLInputElement> {}
-
-export function FileInput(props: Props) {
-  return <input type="file" {...props} />;
-}
+export { default as File } from './file';
+export { default as FileInput } from './file-input';
+export { default as FileLabel } from './file-label';
+export { default as FileList } from './file-list';
