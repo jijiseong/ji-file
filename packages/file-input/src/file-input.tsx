@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef } from 'react';
 import useFile from './use-file';
-import { mergeFileList } from '@ji-file/utils';
+import { mergeFileList } from './utils';
 
 type DefaultInputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
