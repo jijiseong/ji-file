@@ -14,5 +14,8 @@
     "tsup": "^8.3.0",
     "typescript": "latest"
   },
-  "private": false
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  }
 }
