@@ -1,68 +1,62 @@
 'use client';
 
-import { File, FileInput, FileLabel } from 'jifile';
+import { File, FileInput, FileLabel, FileList } from 'jifile';
 import { Controller, useForm } from 'react-hook-form';
-import Code from '../ui/code';
 import ExampleBlock from '../ui/example-block';
 
 const code = `'use client';
 
-import { File, FileInput, FileLabel } from 'jifile';
+import { File, FileInput, FileLabel, FileList } from 'jifile';
 import { Controller, useForm } from 'react-hook-form';
 
-
 function WithReactHookFormExampleResult() {
-  const { control, watch } = useForm<{ files?: FileList }>();
-
-  const files = watch('files');
-  const fileNames = files && Array.from(files).map(({ name }) => name);
+  const { control } = useForm<{ files?: FileList }>();
 
   return (
-    <>
-      <Controller
-        control={control}
-        name={'files'}
-        render={({ field }) => (
-          <File multiple mode="stack" onFileChange={field.onChange}>
-            <FileLabel>Select files</FileLabel>
-            <FileInput hidden />
-          </File>
-        )}
-      />
-
-      <div>
-        watch:
-        <ul>{fileNames?.map((name) => <li key={name}>{name}</li>)}</ul>
-      </div>
-    </>
+    <Controller
+      control={control}
+      name={'files'}
+      render={({ field }) => (
+        <File multiple mode="stack" onFileChange={field.onChange}>
+          <FileLabel>Select files</FileLabel>
+          <FileInput hidden />
+          <FileList
+            renderItem={(file, index, remove) => (
+              <div>
+                <span>{file.name}</span>
+                <button onClick={() => remove(index)}>remove</button>
+              </div>
+            )}
+          />
+        </File>
+      )}
+    />
   );
 }
 `;
 
 function WithReactHookFormExampleResult() {
-  const { control, watch } = useForm<{ files?: FileList }>();
-
-  const files = watch('files');
-  const fileNames = files && Array.from(files).map(({ name }) => name);
+  const { control } = useForm<{ files?: FileList }>();
 
   return (
-    <>
-      <Controller
-        control={control}
-        name={'files'}
-        render={({ field }) => (
-          <File multiple mode="stack" onFileChange={field.onChange}>
-            <FileLabel>Select files</FileLabel>
-            <FileInput hidden />
-          </File>
-        )}
-      />
-
-      <div>
-        watch:
-        <ul>{fileNames?.map((name) => <li key={name}>{name}</li>)}</ul>
-      </div>
-    </>
+    <Controller
+      control={control}
+      name={'files'}
+      render={({ field }) => (
+        <File multiple mode="stack" onFileChange={field.onChange}>
+          <FileLabel>Select files</FileLabel>
+          <FileInput hidden />
+          <FileList
+            renderItem={(file, index, remove) => (
+              <div>
+                <span>{file.name}</span>
+                <button onClick={() => remove(index)}>remove</button>
+              </div>
+            )}
+          />
+        </File>
+      )}
+    />
   );
 }
 
