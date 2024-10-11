@@ -14,9 +14,9 @@ export default function Code({ children }: Props) {
   }).value;
 
   return (
-    <pre className="bg-gray-100 rounded px-4 py-0">
+    <pre className="bg-gray-100 rounded px-4 py-6 h-max">
       <code
-        className="p-0"
+        className="p-0 h-full"
         dangerouslySetInnerHTML={{ __html: highlightedCode }}
       />
     </pre>
