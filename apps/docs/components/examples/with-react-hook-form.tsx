@@ -55,15 +55,21 @@ function WithReactHookFormExampleResult() {
   }>();
 
   const fileArray = Array.from(watch('files') || []);
+
   return (
     <>
       <Controller
         control={control}
         name={'files'}
         render={({ field }) => (
-          <File mode="stack" onFileChange={field.onChange} files={field.value}>
+          <File mode="stack">
             <FileLabel>Select files</FileLabel>
-            <FileInput multiple hidden />
+            <FileInput
+              multiple
+              hidden
+              onFileChange={field.onChange}
+              files={field.value}
+            />
           </File>
         )}
       />

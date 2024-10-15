@@ -7,16 +7,22 @@ type DefaultInputProps = React.DetailedHTMLProps<
   HTMLInputElement
 >;
 
-interface FileInputProps extends Omit<DefaultInputProps, 'type' | 'id'> {}
+interface FileInputProps extends Omit<DefaultInputProps, 'type' | 'id'> {
+  onFileChange?: (files: FileList | undefined) => void;
+  files?: FileList | undefined;
+}
 
-function FileInput(props: FileInputProps, ref: ForwardedRef<HTMLInputElement>) {
-  const { files, id, mode, setFiles } = useFile();
+function FileInput(
+  { files, onFileChange, ...props }: FileInputProps,
+  ref: ForwardedRef<HTMLInputElement>
+) {
+  const { id, mode } = useFile();
 
   const handleChangeDefaultMode: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     if (!event.currentTarget.files) return;
-    setFiles(event.currentTarget.files);
+    onFileChange?.(event.currentTarget.files);
     props.onChange?.(event);
   };
 
@@ -26,7 +32,7 @@ function FileInput(props: FileInputProps, ref: ForwardedRef<HTMLInputElement>) {
     const eventFiles = event.currentTarget.files;
     const newFiles = mergeFileList(files || [], eventFiles || []);
 
-    setFiles(newFiles);
+    onFileChange?.(newFiles);
     props.onChange?.(event);
   };
 
