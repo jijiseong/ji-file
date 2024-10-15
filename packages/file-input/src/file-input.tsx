@@ -13,7 +13,7 @@ interface FileInputProps extends Omit<DefaultInputProps, 'type' | 'id'> {
 }
 
 function FileInput(
-  { files, onFileChange, ...props }: FileInputProps,
+  { files, onFileChange, hidden = true, ...props }: FileInputProps,
   ref: ForwardedRef<HTMLInputElement>
 ) {
   const { id, mode } = useFile();
@@ -34,13 +34,23 @@ function FileInput(
 
     onFileChange?.(newFiles);
     props.onChange?.(event);
+
+    event.currentTarget.value = '';
+    event.currentTarget.files = null;
   };
 
   const handleChange =
     mode === 'stack' ? handleChangeStackMode : handleChangeDefaultMode;
 
   return (
-    <input id={id} ref={ref} type="file" onChange={handleChange} {...props} />
+    <input
+      id={id}
+      ref={ref}
+      type="file"
+      hidden={hidden}
+      onChange={handleChange}
+      {...props}
+    />
   );
 }
 
