@@ -20,9 +20,8 @@ export default function File({
   const [files, setFiles] = useState<FileList | undefined>(filesProp);
 
   useEffect(() => {
-    console.log('files is changed', files);
     onFileChange?.(files);
-  }, [files, onFileChange]);
+  }, [files]);
 
   return (
     <FileContext.Provider

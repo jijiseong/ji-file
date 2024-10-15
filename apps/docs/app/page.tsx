@@ -3,6 +3,7 @@ import WithReactHookForm from '../components/examples/with-react-hook-form';
 import ImageFilePreviewExample from '../components/examples/image-preview';
 import StackModeExample from '@/components/examples/stack-mode';
 import Code from '@/components/ui/code';
+import { Fragment } from 'react';
 
 export default function Home() {
   const examples = [
@@ -32,10 +33,10 @@ export default function Home() {
             {examples.map((block, index) => {
               if (index === examples.length) return block;
               return (
-                <>
+                <Fragment key={block.type}>
                   {block}
                   <hr />
-                </>
+                </Fragment>
               );
             })}
           </div>
