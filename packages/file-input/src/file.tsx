@@ -4,28 +4,29 @@ import FileContext from './file-context';
 interface FileProps {
   id?: string;
   children: React.ReactNode;
-  multiple?: boolean;
-  onFileChange?: (files: FileList | null) => void;
+  files?: FileList | undefined;
+  onFileChange?: (files: FileList | undefined) => void;
   mode?: 'stack' | 'default';
 }
 
 export default function File({
   children,
-  multiple = false,
   onFileChange,
   id,
   mode = 'default',
+  files: filesProp,
 }: FileProps) {
   const uniqueId = useId();
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<FileList | undefined>(filesProp);
 
   useEffect(() => {
+    console.log('files is changed', files);
     onFileChange?.(files);
-  }, [files]);
+  }, [files, onFileChange]);
 
   return (
     <FileContext.Provider
-      value={{ files, setFiles, multiple, id: id || uniqueId, mode }}
+      value={{ files: filesProp, id: id || uniqueId, mode, setFiles }}
     >
       {children}
     </FileContext.Provider>

@@ -15,7 +15,7 @@ function ExampleBlock({ title, description, code, ui }: Props) {
   const [preview, setPreview] = useState(false);
   return (
     <section className="space-y-4">
-      <h2 className="text-xl">{title}</h2>
+      <h3 className="text-lg">{title}</h3>
       <p>{description}</p>
 
       <Tabs className="space-y-2" defaultValue="code">

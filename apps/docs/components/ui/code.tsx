@@ -1,5 +1,5 @@
 import hljs from 'highlight.js';
-import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
 import 'highlight.js/styles/github.css';
 
 interface Props {
@@ -7,10 +7,9 @@ interface Props {
 }
 
 export default function Code({ children }: Props) {
-  hljs.registerLanguage('javascript', javascript);
-
+  hljs.registerLanguage('typescript', typescript);
   const highlightedCode = hljs.highlight(children, {
-    language: 'javascript',
+    language: 'typescript',
   }).value;
 
   return (

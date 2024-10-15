@@ -1,4 +1,17 @@
-export function mergeFileList(orgFileList: FileList, newFileList: FileList) {
+export function getFileList(fileArray: File[]) {
+  const dataTransfer = new DataTransfer();
+
+  fileArray.forEach((file) => {
+    dataTransfer.items.add(file);
+  });
+
+  return dataTransfer.files;
+}
+
+export function mergeFileList(
+  orgFileList: FileList | File[],
+  newFileList: FileList | File[]
+) {
   const newFileArray = Array.from(newFileList);
   const orgFileArray = Array.from(orgFileList);
 
@@ -9,13 +22,9 @@ export function mergeFileList(orgFileList: FileList, newFileList: FileList) {
     return !orgNameArray.includes(newFileName);
   });
 
-  const dataTransfer = new DataTransfer();
+  const fileList = getFileList([...orgFileArray, ...filteredNewFileArray]);
 
-  [...orgFileArray, ...filteredNewFileArray].forEach((file) => {
-    dataTransfer.items.add(file);
-  });
-
-  return dataTransfer.files;
+  return fileList;
 }
 
 export function getPreviewImage(file: File) {
@@ -25,4 +34,31 @@ export function getPreviewImage(file: File) {
   const imageUrl = URL.createObjectURL(file);
 
   return imageUrl;
+}
+
+export function removeFile(
+  files: FileList,
+  target: { index?: number; name?: string }
+) {
+  if (target.index === undefined && target.name === undefined) {
+    throw new Error('An index or name is required.');
+  }
+
+  const type = target.index !== undefined ? 'INDEX' : 'NAME';
+
+  let filteredArray: File[];
+  if (type === 'INDEX') {
+    filteredArray = Array.from(files).filter(
+      (_, index) => index !== target.index
+    );
+  } else if (type === 'NAME') {
+    filteredArray = Array.from(files).filter(
+      (file) => file.name !== target.name
+    );
+  } else {
+    throw new Error('target type is invalid.');
+  }
+
+  const result = getFileList(filteredArray);
+  return result;
 }

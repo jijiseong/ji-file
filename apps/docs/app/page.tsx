@@ -19,19 +19,27 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col gap-20 ">
-        <div>
+        <section>
           <h2 className="text-2xl">Installation</h2>
           <Code>npm install jifile</Code>
-        </div>
-        {examples.map((block, index) => {
-          if (index === examples.length) return block;
-          return (
-            <>
-              {block}
-              <hr />
-            </>
-          );
-        })}
+        </section>
+        <section>
+          <div className="mb-10">
+            <h2 className="text-2xl">Examples</h2>
+            <div>All examples were written using Next.js and Tailwind-css.</div>
+          </div>
+          <div className="flex flex-col gap-20">
+            {examples.map((block, index) => {
+              if (index === examples.length) return block;
+              return (
+                <>
+                  {block}
+                  <hr />
+                </>
+              );
+            })}
+          </div>
+        </section>
       </div>
     </>
   );

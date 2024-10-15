@@ -1,4 +1,4 @@
-import { ForwardedRef, forwardRef } from 'react';
+import { ForwardedRef, forwardRef, useEffect, useRef, useState } from 'react';
 import useFile from './use-file';
 import { mergeFileList } from './utils';
 
@@ -7,15 +7,15 @@ type DefaultInputProps = React.DetailedHTMLProps<
   HTMLInputElement
 >;
 
-interface FileInputProps
-  extends Omit<DefaultInputProps, 'multiple' | 'type' | 'id'> {}
+interface FileInputProps extends Omit<DefaultInputProps, 'type' | 'id'> {}
 
 function FileInput(props: FileInputProps, ref: ForwardedRef<HTMLInputElement>) {
-  const { files, setFiles, multiple, id, mode } = useFile();
+  const { files, id, mode, setFiles } = useFile();
 
   const handleChangeDefaultMode: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
+    if (!event.currentTarget.files) return;
     setFiles(event.currentTarget.files);
     props.onChange?.(event);
   };
@@ -23,16 +23,10 @@ function FileInput(props: FileInputProps, ref: ForwardedRef<HTMLInputElement>) {
   const handleChangeStackMode: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    const newFiles = event.currentTarget.files;
+    const eventFiles = event.currentTarget.files;
+    const newFiles = mergeFileList(files || [], eventFiles || []);
 
-    if (!files) {
-      setFiles(newFiles);
-      return;
-    }
-    if (!newFiles) return;
-
-    const mergedFileList = mergeFileList(files, newFiles);
-    setFiles(mergedFileList);
+    setFiles(newFiles);
     props.onChange?.(event);
   };
 
@@ -40,14 +34,7 @@ function FileInput(props: FileInputProps, ref: ForwardedRef<HTMLInputElement>) {
     mode === 'stack' ? handleChangeStackMode : handleChangeDefaultMode;
 
   return (
-    <input
-      id={id}
-      ref={ref}
-      type="file"
-      onChange={handleChange}
-      multiple={multiple}
-      {...props}
-    />
+    <input id={id} ref={ref} type="file" onChange={handleChange} {...props} />
   );
 }
 

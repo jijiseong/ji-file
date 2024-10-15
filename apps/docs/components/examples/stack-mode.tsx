@@ -1,33 +1,49 @@
 'use client';
 
-import { File, FileInput, FileLabel, FileList, getPreviewImage } from 'jifile';
-import Image from 'next/image';
+import { File, FileInput, FileLabel } from 'jifile';
 import ExampleBlock from '../ui/example-block';
+import { useState } from 'react';
 
 const code = `'use client';
 
-function StackModeExamplePreview() {
-  return (
-    <>
-      <File mode="stack" onFileChange={(files) => console.log(files)}>
-        <FileLabel>Select File</FileLabel>
-        <FileList renderItem={({ name }) => <>{name}</>} />
-        <FileInput hidden />
-      </File>
-      <div>Open the developer tool and check the console.</div>
-    </>
-  );
-}`;
+import { File, FileInput, FileLabel } from 'jifile';
+import ExampleBlock from '../ui/example-block';
 
 function StackModeExamplePreview() {
+  const [files, setFiles] = useState<FileList>();
+  const fileArray = Array.from(files || []);
+
   return (
     <>
-      <File mode="stack" onFileChange={(files) => console.log(files)}>
+      <File mode="stack" onFileChange={setFiles} files={files}>
         <FileLabel>Select File</FileLabel>
-        <FileList renderItem={({ name }) => <>{name}</>} />
+        <div className="flex flex-col gap-2">
+          {fileArray.map((file) => (
+            <span key={file.name}>{file.name}</span>
+          ))}
+        </div>
         <FileInput hidden />
       </File>
-      <div>Open the developer tool and check the console.</div>
+    </>
+  );
+}
+`;
+
+function StackModeExamplePreview() {
+  const [files, setFiles] = useState<FileList>();
+  const fileArray = Array.from(files || []);
+
+  return (
+    <>
+      <File mode="stack" onFileChange={setFiles} files={files}>
+        <FileLabel>Select File</FileLabel>
+        <div className="flex flex-col gap-2">
+          {fileArray.map((file) => (
+            <span key={file.name}>{file.name}</span>
+          ))}
+        </div>
+        <FileInput hidden />
+      </File>
     </>
   );
 }
