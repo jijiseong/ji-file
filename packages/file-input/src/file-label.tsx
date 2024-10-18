@@ -1,3 +1,4 @@
+import { ForwardedRef, forwardRef } from 'react';
 import useFile from './use-file';
 
 interface FileLabelProps
@@ -6,8 +7,13 @@ interface FileLabelProps
     HTMLLabelElement
   > {}
 
-export default function FileLabel(props: FileLabelProps) {
-  const { id } = useFile();
+const FileLabel = forwardRef(
+  (props: FileLabelProps, ref: ForwardedRef<HTMLLabelElement>) => {
+    const { id } = useFile();
 
-  return <label {...props} htmlFor={id} />;
-}
+    return <label ref={ref} {...props} htmlFor={id} />;
+  }
+);
+FileLabel.displayName = 'FileLabel';
+
+export default FileLabel;
